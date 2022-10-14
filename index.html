@@ -5,6 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>공공데이터</title>
+    <style>
+      .list {
+        border: solid 1px gray;
+        border-radius: 10px;
+        overflow: hidden;
+        clear: both;
+      }
+    </style>
   </head>
   <body>
     <h1>Menu List</h1>
@@ -15,7 +23,36 @@
       const nextButton = document.querySelector("#next");
       let nextCount = 0;
 
-      async function getMenuList(nextCount) {}
+      async function getMenuList(nextCount) {
+        const response = await fetch("./공공데이터.json");
+        const data = await response.json();
+        console.log(data);
+
+        const menuName = data.body[0].MENU_NM;
+        const restaurantName = data.body[0].RSTR_NM;
+        const category = data.body[0].MENU_CTGRY_LCLAS_NM;
+
+        function menuTag(menuName, restaurantName, category) {
+          const restaurantNameTag = document.createElement("h3");
+          restaurantNameTag.innerHTML = restaurantName;
+          const menuCategoryTag = document.createElement("p");
+          menuCategoryTag.innerHTML = category + " - " + menuName;
+
+          const menuBox = document.createElement("div");
+          menuBox.append(restaurantNameTag);
+          menuBox.append(menuCategoryTag);
+
+          menuBox.classList.add("list");
+          document.querySelector("body").append(menuBox);
+        }
+        for (let i = nextCount; i < nextCount + 5; i++) {
+          menuTag(
+            data.body[i].MENU_NM,
+            data.body[i].RSTR_NM,
+            data.body[i].MENU_CTGRY_LCLAS_NM
+          );
+        }
+      }
       getMenuList(0);
 
       nextButton.addEventListener("click", () => {
