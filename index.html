@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>공공데이터</title>
+  </head>
+  <body>
+    <h1>Menu List</h1>
+    <h3>식당이름</h3>
+    <p>메뉴카테고리 - 메뉴이름</p>
+    <button id="next">Next</button>
+    <script>
+      const nextButton = document.querySelector("#next");
+      let nextCount = 0;
+
+      async function getMenuList(nextCount) {}
+      getMenuList(0);
+
+      nextButton.addEventListener("click", () => {
+        nextCount += 5;
+        getMenuList(nextCount);
+      });
+    </script>
+  </body>
+</html>
