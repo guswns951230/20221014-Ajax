@@ -17,6 +17,7 @@
   <body>
     <h1>Menu List</h1>
     <h3>식당이름</h3>
+    <p>메뉴 번호</p>
     <p>메뉴카테고리 - 메뉴이름</p>
     <button id="next">Next</button>
     <script>
@@ -28,18 +29,17 @@
         const data = await response.json();
         console.log(data);
 
-        const menuName = data.body[0].MENU_NM;
-        const restaurantName = data.body[0].RSTR_NM;
-        const category = data.body[0].MENU_CTGRY_LCLAS_NM;
-
-        function menuTag(menuName, restaurantName, category) {
+        function menuTag(menuNum, menuName, restaurantName, category) {
           const restaurantNameTag = document.createElement("h3");
           restaurantNameTag.innerHTML = restaurantName;
+          const menuNumTag = document.createElement("p");
+          menuNumTag.innerHTML = "Menu " + (menuNum + 1);
           const menuCategoryTag = document.createElement("p");
           menuCategoryTag.innerHTML = category + " - " + menuName;
 
           const menuBox = document.createElement("div");
           menuBox.append(restaurantNameTag);
+          menuBox.append(menuNumTag);
           menuBox.append(menuCategoryTag);
 
           menuBox.classList.add("list");
@@ -47,6 +47,7 @@
         }
         for (let i = nextCount; i < nextCount + 5; i++) {
           menuTag(
+            i,
             data.body[i].MENU_NM,
             data.body[i].RSTR_NM,
             data.body[i].MENU_CTGRY_LCLAS_NM
