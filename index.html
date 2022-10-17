@@ -25,7 +25,7 @@
       let nextCount = 0;
 
       async function getMenuList(nextCount) {
-        const response = await fetch("./공공데이터.json");
+        const response = await fetch("./공공데이터.json", { method: "GET" });
         const data = await response.json();
         console.log(data);
 
@@ -33,9 +33,9 @@
           const restaurantNameTag = document.createElement("h3");
           restaurantNameTag.innerHTML = restaurantName;
           const menuNumTag = document.createElement("p");
-          menuNumTag.innerHTML = "Menu " + (menuNum + 1);
+          menuNumTag.innerHTML = `Menu ${menuNum + 1}`;
           const menuCategoryTag = document.createElement("p");
-          menuCategoryTag.innerHTML = category + " - " + menuName;
+          menuCategoryTag.innerHTML = `${category} - ${menuName}`;
 
           const menuBox = document.createElement("div");
           menuBox.append(restaurantNameTag);
